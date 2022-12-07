@@ -77,14 +77,14 @@ class ZXPP_Popup {
         ?>
         <div class="warp">
             <h2><span class="dashicons dashicons-welcome-write-blog"></span>POPUP Zyrex</h2>
-            <?= isset($notice) ? $notice : ''; ?>
+            <?php= isset($notice) ? $notice : ''; ?>
             <form method="POST" enctype='multipart/form-data'>
-                <?= $edit ? '<input type="hidden" name="popup_post_id" value="' . $edit->id . '" />' : ''; ?>
-                <input type="hidden" name="popup_action" value="<?= $edit ? 'edit' : 'add'; ?>"/>
-                <input type="text" name="tytul" value="<?= $edit ? $edit->tytul : ''; ?>" placeholder="Tytuł"/>
-                <input type="text" name="link" value="<?= $edit ? $edit->link : ''; ?>" placeholder="Link"/>
-                <?= $edit ? '<input type="hidden" name="img" value="' . $edit->img . '" />' : '<input type="file" name="img" required>'; ?>
-                <input type="submit" value="<?= $edit ? 'Edytuj' : 'Dodaj'; ?> popup" class="button-primary"/>
+                <?php= $edit ? '<input type="hidden" name="popup_post_id" value="' . $edit->id . '" />' : ''; ?>
+                <input type="hidden" name="popup_action" value="<?php= $edit ? 'edit' : 'add'; ?>"/>
+                <input type="text" name="tytul" value="<?php= $edit ? $edit->tytul : ''; ?>" placeholder="Tytuł"/>
+                <input type="text" name="link" value="<?php= $edit ? $edit->link : ''; ?>" placeholder="Link"/>
+                <?php= $edit ? '<input type="hidden" name="img" value="' . $edit->img . '" />' : '<input type="file" name="img" required>'; ?>
+                <input type="submit" value="<?php= $edit ? 'Edytuj' : 'Dodaj'; ?> popup" class="button-primary"/>
             </form>
             <hr>
             <?php
@@ -113,28 +113,30 @@ class ZXPP_Popup {
                                 </tfoot>';
                 echo '<tbody>';
                 foreach ($all_posts as $p) {
-                  $id = esc_html( $p->id );
-                  $tytul = esc_html( $p->tytul );
+                  $id = $p->id ;
+                  $tytul = $p->tytul;
+                  $link = $p->link;
+                  $img = $p->img;
                     echo '<tr>';
-                    echo '<td>' . $id . '</td>';
-                    echo '<td>' . $tytul . '</td>';
+                    echo '<td>' . esc_html($id) . '</td>';
+                    echo '<td>' . esc_html($tytul) . '</td>';
                     if ($p->active == 0) {
                       echo '<td><form method="POST">
-                                          <input type="hidden" name="popup_id" value="' . $p->id . '" />
+                                          <input type="hidden" name="popup_id" value="' . esc_html($id) . '" />
                                           <input type="hidden" name="popup_action" value="aktywuj"/>
                                           <input type="submit" name="popup_aktywuj" value="Aktywuj" class="button-primary" />
                                       </form></td>';
                     } else {
                       echo '<td><form method="POST">
-                                          <input type="hidden" name="popup_id" value="' . $p->id . '" />
+                                          <input type="hidden" name="popup_id" value="' . esc_html($id) . '" />
                                           <input type="hidden" name="popup_action" value="dezaktywuj"/>
                                           <input type="submit" name="popup_dezaktywuj" value="wyłącz" class="button-secondary error" />
                                       </form></td>';
                     }
-                    echo '<td>' . $p->link . '</td>';
-                    echo '<td><img src="' . $p->img . '"style="width:100px;height:auto;"></td>';
+                    echo '<td>' . esc_html($link) . '</td>';
+                    echo '<td><img src="' . esc_html($img) . '"style="width:100px;height:auto;"></td>';
                     echo '<td><form method="POST">
-                                        <input type="hidden" name="popup_post_id" value="' . $p->id . '" />
+                                        <input type="hidden" name="popup_post_id" value="' . esc_html($id) . '" />
                                         <input type="submit" name="popup_to_edit" value="Edytuj" class="button-primary" />
                                         <input type="submit" name="popup_delete" value="Usuń" class="button-secondary error" />
                                     </form></td>';

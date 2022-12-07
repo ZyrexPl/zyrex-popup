@@ -69,7 +69,7 @@ register_activation_hook(__FILE__, 'zxpp_activation_data');
         if ($popup_img) {
             foreach ($popup_img as $p) {
               $aktywny = $p->active;
-              $img = esc_html( $p->img );
+              $img = $p->img;
               if ($aktywny == "1") {
         echo '<div id="js-cookie-popup" class="popup popup-hide">';
         echo '<div class="popup-content">';
@@ -86,7 +86,7 @@ register_activation_hook(__FILE__, 'zxpp_activation_data');
         echo '</div>';
 
                 echo '<div>';
-                echo '<img src="' . $img . '" class="img-popup">';
+                echo '<img src="' . esc_html($img) . '" class="img-popup">';
             //    echo '<img src="/wp-content/uploads/2022/11/black-week.jpg" class="img-popup">';
                 echo '</div>';
 
