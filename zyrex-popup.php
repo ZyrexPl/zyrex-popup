@@ -2,26 +2,26 @@
 /**
 Plugin Name: POPUP ZYREX
 Version: 1.0
-Description: Wyskakujące okienko z banerem. 
+Description: Wyskakujące okienko z banerem.
 Author: Michał Żyrek
 Author URI: http://zyrex.pl
 Plugin URI: http://zyrex.pl/plugin/popup
  */
 
 require_once 'class/class.php';
-$popup = new Popup();
+$popup = new ZXPP_Popup();
 
 
 //add_shortcode('listatodo', 'wyswietl_liste');
-function zx_add_scripts_and_styles() {
-    wp_enqueue_style('zyrex-main-css', plugins_url('zyrex-popup/css/main.css'));
-    wp_enqueue_script( 'jquery2.1.3', '//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js' , array(), '2.1.3', true );
-    wp_enqueue_script( 'zyrex-script-main', plugins_url('zyrex-popup/js/main.js') , array(), '1.0.0', true );
+function zxpp_add_scripts_and_styles() {
+    wp_enqueue_style('zyrex-main-css', plugins_url( __FILE__ ) .'css/main.css');
+    wp_enqueue_script( 'jquery', '/wp-includes/js/jquery/jquery.js' , array(), '3.6.1', true );
+    wp_enqueue_script( 'zyrex-script-main', plugins_url( __FILE__ ) . 'js/main.js' , array(), '1.0.0', true );
 }
 
-add_action('wp_enqueue_scripts', 'zx_add_scripts_and_styles');
+add_action('wp_enqueue_scripts', 'zxpp_add_scripts_and_styles');
 
-function zx_activation() {
+function zxpp_activation() {
     global $wpdb;
     $table_name = $wpdb->prefix . 'zxpopup';
 
@@ -39,12 +39,12 @@ function zx_activation() {
     }
 }
 
-function zx_activation_data() {
+function zxpp_activation_data() {
 	global $wpdb;
 
 	$tytul = 'Mój pierwszy POPUP';
 	$link = '#';
-  $img = '/wp-content/plugins/zyrex-popup/img/zyrex.jpg';
+  $img = plugins_url( __FILE__ )'img/zyrex.jpg';
   $active = '0';
 
 	$table_name = $wpdb->prefix . 'zxpopup';
@@ -60,8 +60,8 @@ function zx_activation_data() {
 	);
 }
 
-register_activation_hook(__FILE__, 'zx_activation');
-register_activation_hook(__FILE__, 'zx_activation_data');
+register_activation_hook(__FILE__, 'zxpp_activation');
+register_activation_hook(__FILE__, 'zxpp_activation_data');
 
     function wyswietl_popup(){
         global $popup;
@@ -69,6 +69,7 @@ register_activation_hook(__FILE__, 'zx_activation_data');
         if ($popup_img) {
             foreach ($popup_img as $p) {
               $aktywny = $p->active;
+              $img = esc_html( $p->img );
               if ($aktywny == "1") {
         echo '<div id="js-cookie-popup" class="popup popup-hide">';
         echo '<div class="popup-content">';
@@ -85,7 +86,7 @@ register_activation_hook(__FILE__, 'zx_activation_data');
         echo '</div>';
 
                 echo '<div>';
-                echo '<img src="' . $p->img . '" class="img-popup">';
+                echo '<img src="' . $img . '" class="img-popup">';
             //    echo '<img src="/wp-content/uploads/2022/11/black-week.jpg" class="img-popup">';
                 echo '</div>';
 

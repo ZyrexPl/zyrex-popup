@@ -1,5 +1,5 @@
 <?php
-class Popup {
+class ZXPP_Popup {
     private $wpdb;
     private $table_name;
 
@@ -29,9 +29,9 @@ class Popup {
               }
                 //Dodawanie wiadomości
                 if($this->add_post($_POST['tytul'], $_POST['link'], $img)) {
-                    $notice = '<div class="notice notice-success">Dodano popup: ' . $_POST['tytul'] . '</div>';
+                    $notice = '<div class="notice notice-success">Dodano popup</div>';
                 } else {
-                    $notice = '<div class="notice notice-error">Nie dodano popup: ' . $_POST['tytul'] . '</div>';
+                    $notice = '<div class="notice notice-error">Nie dodano popup</div>';
                 }
             } else if($_POST['popup_action'] == 'edit') {
                 //edycja wiadomości
@@ -113,9 +113,11 @@ class Popup {
                                 </tfoot>';
                 echo '<tbody>';
                 foreach ($all_posts as $p) {
+                  $id = esc_html( $p->id );
+                  $tytul = esc_html( $p->tytul );
                     echo '<tr>';
-                    echo '<td>' . $p->id . '</td>';
-                    echo '<td>' . $p->tytul . '</td>';
+                    echo '<td>' . $id . '</td>';
+                    echo '<td>' . $tytul . '</td>';
                     if ($p->active == 0) {
                       echo '<td><form method="POST">
                                           <input type="hidden" name="popup_id" value="' . $p->id . '" />
