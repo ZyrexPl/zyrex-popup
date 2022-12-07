@@ -44,7 +44,7 @@ function zxpp_activation_data() {
 
 	$tytul = 'Mój pierwszy POPUP';
 	$link = '#';
-  $img = plugins_url( __FILE__ )'img/zyrex.jpg';
+  $img = plugins_url( __FILE__ ).'img/zyrex.jpg';
   $active = '0';
 
 	$table_name = $wpdb->prefix . 'zxpopup';
