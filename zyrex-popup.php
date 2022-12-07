@@ -14,9 +14,9 @@ $popup = new ZXPP_Popup();
 
 //add_shortcode('listatodo', 'wyswietl_liste');
 function zxpp_add_scripts_and_styles() {
-    wp_enqueue_style('zyrex-main-css', plugins_url( __FILE__ ) .'css/main.css');
+    wp_enqueue_style('zyrex-main-css', plugins_url( 'css/main.css', __FILE__ ));
     wp_enqueue_script( 'jquery', '/wp-includes/js/jquery/jquery.js' , array(), '3.6.1', true );
-    wp_enqueue_script( 'zyrex-script-main', plugins_url( __FILE__ ) . 'js/main.js' , array(), '1.0.0', true );
+    wp_enqueue_script( 'zyrex-script-main', plugins_url( 'js/main.js', __FILE__ ) , array(), '1.0.0', true );
 }
 
 add_action('wp_enqueue_scripts', 'zxpp_add_scripts_and_styles');
@@ -44,7 +44,7 @@ function zxpp_activation_data() {
 
 	$tytul = 'Mój pierwszy POPUP';
 	$link = '#';
-  $img = plugins_url( __FILE__ ).'img/zyrex.jpg';
+  $img = plugins_url( 'img/zyrex.jpg', __FILE__ );
   $active = '0';
 
 	$table_name = $wpdb->prefix . 'zxpopup';
