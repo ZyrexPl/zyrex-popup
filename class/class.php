@@ -29,32 +29,40 @@ class ZXPP_Popup {
               }
                 //Dodawanie wiadomości
                 if($this->add_post($_POST['tytul'], $_POST['link'], $img)) {
-                    $notice = '<div class="notice notice-success">Dodano popup</div>';
+                    $notice = 'Dodano popup';
+                    $klasa = 'notice-success';
                 } else {
-                    $notice = '<div class="notice notice-error">Nie dodano popup</div>';
+                    $notice = 'Nie dodano popup';
+                    $klasa = 'notice-error';
                 }
             } else if($_POST['popup_action'] == 'edit') {
                 //edycja wiadomości
                 if($this->edit_post($_POST['popup_post_id'],$_POST['tytul'])) {
-                    $notice = '<div class="notice notice-success">Edytowano popup</div>';
+                    $notice = 'Edytowano popup';
+                    $klasa = 'notice-success';
                 } else {
-                    $notice = '<div class="notice notice-error">Nie udało się zaktualizować popup</div>';
+                    $notice = 'Nie udało się zaktualizować popup';
+                    $klasa = 'notice-error';
                 }
             } else if($_POST['popup_action'] == 'aktywuj') {
                 //edycja wiadomości
                 $a = 1;
                 if($this->edit_active($_POST['popup_id'],$a)) {
-                    $notice = '<div class="notice notice-success">Aktywowano popup</div>';
+                    $notice = 'Aktywowano popup';
+                    $klasa = 'notice-success';
                 } else {
-                    $notice = '<div class="notice notice-error">Nie udało się aktywować popupa/div>';
+                    $notice = 'Nie udało się aktywować popupa';
+                    $klasa = 'notice-error';
                 }
             } else if($_POST['popup_action'] == 'dezaktywuj') {
                 //edycja wiadomości
                 $a = 0;
                 if($this->edit_active($_POST['popup_id'],$a)) {
-                    $notice = '<div class="notice notice-success">Dezaktywowano popup</div>';
+                    $notice = 'Dezaktywowano popup';
+                    $klasa = 'notice-success';
                 } else {
-                    $notice = '<div class="notice notice-error">Nie udało się dezaktywować popupa/div>';
+                    $notice = 'Nie udało się dezaktywować popupa';
+                    $klasa = 'notice-error';
                 }
             }
         }
@@ -62,9 +70,11 @@ class ZXPP_Popup {
         if(isset($_POST['popup_delete'])) {
             //usuwanie wiadomości
             if($this->delete_post($_POST['popup_post_id'])) {
-                $notice = '<div class="notice notice-success">Usunięto popup</div>';
+                $notice = 'Usunięto popup';
+                $klasa = 'notice-success';
             } else {
-                $notice = '<div class="notice notice-error">Nie usunięto popup</div>';
+                $notice = 'Nie usunięto popup';
+                $klasa = 'notice-error';
             }
         }
 
@@ -78,7 +88,7 @@ class ZXPP_Popup {
         <div class="warp">
             <h2><span class="dashicons dashicons-welcome-write-blog"></span>POPUP Zyrex</h2>
             <?php if (isset($notice)) {
-              echo $notice;
+              echo '<div class="notice ' . esc_html($klasa) . '">' . esc_html($notice ) . '</div>';
             }  else {
               echo '';
             } ?>
@@ -179,14 +189,14 @@ class ZXPP_Popup {
     }
 
     function get_popup_img() {
-        return $this->wpdb->get_results("SELECT * FROM $this->table_name");
+        return $this->wpdb->prepare("SELECT * FROM $this->table_name");
     }
 
     //funkcja służąca do pobrania wiadomości o konkretnym id
     //zwraca obiekt
     function get_popup_post($id) {
         $id = esc_sql($id);
-        $popup_post = $this->wpdb->get_results("SELECT * FROM $this->table_name WHERE id = '" . $id . "'");
+        $popup_post = $this->$wpdb->get_results( $wpdb->prepare( "SELECT * FROM $this->table_name WHERE id = %d", $id ) );
         if(isset($popup_post[0])){
             return $popup_post[0];
         } else {
