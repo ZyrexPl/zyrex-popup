@@ -86,7 +86,7 @@ register_activation_hook(__FILE__, 'zxpp_activation_data');
         echo '</div>';
 
                 echo '<div>';
-                echo '<img src="' . esc_html($img) . '" class="img-popup">';
+                echo '<img src="' . esc_url($img) . '" class="img-popup">';
             //    echo '<img src="/wp-content/uploads/2022/11/black-week.jpg" class="img-popup">';
                 echo '</div>';
 

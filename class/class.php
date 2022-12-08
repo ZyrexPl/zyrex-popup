@@ -78,17 +78,17 @@ class ZXPP_Popup {
         <div class="warp">
             <h2><span class="dashicons dashicons-welcome-write-blog"></span>POPUP Zyrex</h2>
             <?php if (isset($notice)) {
-              echo esc_html($notice);
+              echo $notice;
             }  else {
               echo '';
             } ?>
             <form method="POST" enctype='multipart/form-data'>
                 <?php if ($edit != FALSE) {
-                  echo '<input type="hidden" name="popup_post_id" value="' . esc_($edit->id) . '" />';
+                  echo '<input type="hidden" name="popup_post_id" value="' . esc_html($edit->id) . '" />';
                   echo '<input type="hidden" name="popup_action" value="edit"/>';
-                  echo '<input type="text" name="tytul" value="' . esc_($edit->tytul) . '" placeholder="Tytuł"/>';
-                  echo '<input type="text" name="link" value="' . esc_($edit->link) . '" placeholder="Link"/>';
-                  echo '<input type="hidden" name="img" value="' . esc_($edit->img) . '" />';
+                  echo '<input type="text" name="tytul" value="' . esc_html($edit->tytul) . '" placeholder="Tytuł"/>';
+                  echo '<input type="text" name="link" value="' . esc_url($edit->link) . '" placeholder="Link"/>';
+                  echo '<input type="hidden" name="img" value="' . esc_url($edit->img) . '" />';
                   echo '<input type="submit" value="Edytuj popup" class="button-primary"/>';
                 } else {
                   echo '<input type="hidden" name="popup_action" value="add"/>';
@@ -145,8 +145,8 @@ class ZXPP_Popup {
                                           <input type="submit" name="popup_dezaktywuj" value="wyłącz" class="button-secondary error" />
                                       </form></td>';
                     }
-                    echo '<td>' . esc_html($link) . '</td>';
-                    echo '<td><img src="' . esc_html($img) . '"style="width:100px;height:auto;"></td>';
+                    echo '<td>' . esc_url($link) . '</td>';
+                    echo '<td><img src="' . esc_url($img) . '"style="width:100px;height:auto;"></td>';
                     echo '<td><form method="POST">
                                         <input type="hidden" name="popup_post_id" value="' . esc_html($id) . '" />
                                         <input type="submit" name="popup_to_edit" value="Edytuj" class="button-primary" />
