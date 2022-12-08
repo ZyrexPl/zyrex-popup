@@ -77,14 +77,26 @@ class ZXPP_Popup {
         ?>
         <div class="warp">
             <h2><span class="dashicons dashicons-welcome-write-blog"></span>POPUP Zyrex</h2>
-            <?php= isset($notice) ? $notice : ''; ?>
+            <?php if (isset($notice)) {
+              echo esc_html($notice);
+            }  else {
+              echo '';
+            } ?>
             <form method="POST" enctype='multipart/form-data'>
-                <?php= $edit ? '<input type="hidden" name="popup_post_id" value="' . $edit->id . '" />' : ''; ?>
-                <input type="hidden" name="popup_action" value="<?php= $edit ? 'edit' : 'add'; ?>"/>
-                <input type="text" name="tytul" value="<?php= $edit ? $edit->tytul : ''; ?>" placeholder="Tytuł"/>
-                <input type="text" name="link" value="<?php= $edit ? $edit->link : ''; ?>" placeholder="Link"/>
-                <?php= $edit ? '<input type="hidden" name="img" value="' . $edit->img . '" />' : '<input type="file" name="img" required>'; ?>
-                <input type="submit" value="<?php= $edit ? 'Edytuj' : 'Dodaj'; ?> popup" class="button-primary"/>
+                <?php if (isset($edit)) {
+                  echo '<input type="hidden" name="popup_post_id" value="' . esc_html($edit->id) . '" />';
+                  echo '<input type="hidden" name="popup_action" value="edit"/>';
+                  echo '<input type="text" name="tytul" value="' . esc_html($edit->tytul) . '" placeholder="Tytuł"/>';
+                  echo '<input type="text" name="link" value="' . esc_html($edit->link) . '" placeholder="Link"/>';
+                  echo '<input type="hidden" name="img" value="' . esc_html($edit->img) . '" />';
+                  echo '<input type="submit" value="Edytuj popup" class="button-primary"/>';
+                } else {
+                  echo '<input type="hidden" name="popup_action" value="add"/>';
+                  echo '<input type="text" name="tytul" value="" placeholder="Tytuł"/>';
+                  echo '<input type="text" name="link" value="" placeholder="Link"/>';
+                  echo '<input type="file" name="img" required>';
+                  echo '<input type="submit" value="Dodaj popup" class="button-primary"/>';
+                }  ?>
             </form>
             <hr>
             <?php
