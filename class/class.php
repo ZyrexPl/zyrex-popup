@@ -25,7 +25,7 @@ class ZXPP_Popup {
               $img = $_FILES["img"]["name"];
               $target_file = $upload_dir['basedir'] . '/' . $img;
               if(move_uploaded_file($_FILES["img"]["tmp_name"], $target_file)) {
-                echo 'udało się';
+                echo '';
               }
                 //Dodawanie wiadomości
                 if($this->add_post($_POST['tytul'], $_POST['link'], $img)) {
@@ -83,12 +83,12 @@ class ZXPP_Popup {
               echo '';
             } ?>
             <form method="POST" enctype='multipart/form-data'>
-                <?php if (isset($edit)) {
-                  echo '<input type="hidden" name="popup_post_id" value="' . esc_html($edit->id) . '" />';
+                <?php if ($edit != FALSE) {
+                  echo '<input type="hidden" name="popup_post_id" value="' . esc_($edit->id) . '" />';
                   echo '<input type="hidden" name="popup_action" value="edit"/>';
-                  echo '<input type="text" name="tytul" value="' . esc_html($edit->tytul) . '" placeholder="Tytuł"/>';
-                  echo '<input type="text" name="link" value="' . esc_html($edit->link) . '" placeholder="Link"/>';
-                  echo '<input type="hidden" name="img" value="' . esc_html($edit->img) . '" />';
+                  echo '<input type="text" name="tytul" value="' . esc_($edit->tytul) . '" placeholder="Tytuł"/>';
+                  echo '<input type="text" name="link" value="' . esc_($edit->link) . '" placeholder="Link"/>';
+                  echo '<input type="hidden" name="img" value="' . esc_($edit->img) . '" />';
                   echo '<input type="submit" value="Edytuj popup" class="button-primary"/>';
                 } else {
                   echo '<input type="hidden" name="popup_action" value="add"/>';
