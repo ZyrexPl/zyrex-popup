@@ -189,7 +189,7 @@ class ZXPP_Popup {
     }
 
     function get_popup_img() {
-        return $this->wpdb->prepare("SELECT * FROM $this->table_name");
+        return $this->wpdb->get_results("SELECT * FROM $this->table_name");
     }
 
     //funkcja służąca do pobrania wiadomości o konkretnym id
