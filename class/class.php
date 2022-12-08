@@ -189,14 +189,14 @@ class ZXPP_Popup {
     }
 
     function get_popup_img() {
-        return $this->wpdb->get_results("SELECT * FROM $this->table_name");
+        return $this->wpdb->get_results( $this->wpdb->prepare("SELECT * FROM $this->table_name") );
     }
 
     //funkcja służąca do pobrania wiadomości o konkretnym id
     //zwraca obiekt
     function get_popup_post($id) {
         $id = esc_sql($id);
-        $popup_post = $this->$wpdb->get_results( $wpdb->prepare( "SELECT * FROM $this->table_name WHERE id = %d", $id ) );
+        $popup_post = $this->wpdb->get_results( $this->wpdb->prepare( "SELECT * FROM $this->table_name WHERE id = %d", $id ) );
         if(isset($popup_post[0])){
             return $popup_post[0];
         } else {

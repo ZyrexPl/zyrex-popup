@@ -1,3 +1,4 @@
+var $ = jQuery.noConflict();
 const cookiePopup = document.getElementById('js-cookie-popup');
 const popupButton = document.getElementById('js-cookie-popup-button');
 
