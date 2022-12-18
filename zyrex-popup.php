@@ -100,8 +100,7 @@ register_activation_hook(__FILE__, 'zxpp_activation_data');
         echo '<script>';
         echo '
         $(".popup .close").on("click", function () {
-          setCookie("cookie-popup", true, 1);
-        //	Cookies.set("' . $link . '", true, { expires: 7 });
+          setCookie("' . $link . '", true, 1);
           closePopupScreen();
         });
 
@@ -115,7 +114,6 @@ register_activation_hook(__FILE__, 'zxpp_activation_data');
         $(document).keyup(function (e) {
           if (e.key === "Escape") {
             setCookie("' . $link . '", true, 1);
-        //	  Cookies.set("cookie-popup", true, { expires: 7 });
             closePopup();
           }
         });
