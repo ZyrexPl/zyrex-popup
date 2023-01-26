@@ -25,6 +25,4 @@ The plugin uses cookies. If the visitor presses the close button, the pop-up ban
 
 By default, the cookie is deleted after one day.
 
-== Screenshots ==
-
-1. General tab of the plugin settings
+Welcome to my programming website: https://zyrex.eu/
