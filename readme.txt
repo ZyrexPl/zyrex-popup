@@ -12,7 +12,9 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Pop-up banner. Add an image and activate it.
 
 == Description ==
-The plugin uses cookies. If the visitor presses the close button, the pop-up banner will not work for one day. Add an image and activate it.
+Pop Up is a WordPress plugin that allows you to create and display notifications on your website in the form of a banner. The plugin allows you to create different types of notifications, such as notifications about news, special offers, invitations to subscribe to a newsletter or other information. The pop up adapts its size to the banner. The plugin is easy to use and can be set up in a few simple steps. Simply upload the banner and activate it. The visitor to our site after closing the popup will not see it for a day.
+
+Translated with www.DeepL.com/Translator (free version)
 
 == Installation ==
 
